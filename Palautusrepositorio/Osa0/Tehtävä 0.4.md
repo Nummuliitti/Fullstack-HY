@@ -7,6 +7,7 @@ sequenceDiagram
     activate user
     user->>browser: WRITE INTO TEXTFIELD "Hello World"
     user->>browser: PUSH BUTTON "Save"
+    deactivate user
     activate browser
     Note right of browser: The browser seeks the form called "notes_form" and prevents default action (submitting the form)
     browser->>browser: CREATE NEW NOTE (user submitted text & date)
@@ -20,6 +21,6 @@ sequenceDiagram
     server-->>browser: MESSAGE "HTTP 201 CREATED"
     deactivate server
     deactivate browser
-    deactivate user
+    
 ```
 
