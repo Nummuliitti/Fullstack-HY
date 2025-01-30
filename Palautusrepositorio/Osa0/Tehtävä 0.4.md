@@ -9,17 +9,41 @@ sequenceDiagram
     user->>browser: PUSH BUTTON "Save"
     deactivate user
     activate browser
-    Note right of browser: The browser seeks the form called "notes_form" and prevents default action (submitting the form)
-    browser->>browser: CREATE NEW NOTE (user submitted text & date)
-    browser->>browser: INSERT NOTE TO ARRAY "notes"
-    browser->>browser: RESET NOTE AUX VARIABLE TO EMPTY ("")
-    browser->>browser: DRAW NEW NOTE TO PAGE WITH OLD NOTES
-    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
-    Note right of browser: Request header tells to server that the content type is JSON
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
-    browser->>server: {content: "Hello world", date: "2025-01-10T12:43:17.441Z"}
-    server-->>browser: MESSAGE "HTTP 201 CREATED"
+    server->>browser: MESSAGE "HTTP 302 FOUND"
+
+    Note right of server: The server has a javascript file in this location, which is now executed.
+    It tells the server to read the user sent input (content: req.body.note), created a date for it, and inserts them into the "notes" array.
+
+    After doing this, the server tells browser to automatically do a HTTP GET request to location "/notes".
+    This location is mentioned in the header section in the message from server.
+    
     deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "Hello world", "date": "2025-01-30T05:55:30.613Z" }, ... ]
+    deactivate server    
+   
     deactivate browser
     
 ```
