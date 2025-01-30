@@ -37,7 +37,7 @@ sequenceDiagram
     activate server
     server-->>browser: [{ "content": "Hello world", "date": "2025-01-30T05:55:30.613Z" }, ... ]
     deactivate server    
-   
+    Note right of browser: The browser executes the callback function that renders the notes 
     deactivate browser
     
 ```
