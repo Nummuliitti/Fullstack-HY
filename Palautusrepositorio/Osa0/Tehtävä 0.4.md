@@ -13,7 +13,7 @@ sequenceDiagram
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
     server->>browser: MESSAGE "HTTP 302 FOUND"
-    Note right of server: The server has a javascript file in this location, which is now executed.<br>It tells the server to read the user sent input (content: req.body.note), created a date for it, and inserts them into the "notes" array.<br>After doing this, the server tells browser to automatically do a HTTP GET request to location "/notes".<br>This location is mentioned in the header section in the message from server.
+    Note right of server: The server has a js file in this location, which is now executed.<br>It tells the server to read the user sent input (content: req.body.note), creates a date, and inserts them into the "notes" array.<br>After doing this, the server tells browser to do a HTTP GET request to location "/notes".<br>This location is mentioned in the header section in the message from server.
     deactivate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
