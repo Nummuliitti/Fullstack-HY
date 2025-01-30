@@ -14,8 +14,7 @@ sequenceDiagram
     activate server
     server->>browser: MESSAGE "HTTP 302 FOUND"
 
-    Note right of server: The server has a javascript file in this location, which is now executed.
-    It tells the server to read the user sent input (req.body.note), created a date for it, and inserts them into the "notes" array.
+    Note right of server: The server has a javascript file in this location, which is now executed. It tells the server to read the user sent input (req.body.note), created a date for it, and inserts them into the "notes" array.
 
     After doing this, the server tells browser to automatically do a HTTP GET request to location "/notes".
     This location is mentioned in the header section in the message from server.
