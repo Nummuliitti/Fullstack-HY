@@ -47,7 +47,7 @@ const App = () => {
     neutral: neutral,
     summa: good + bad + neutral,
     karvototal: karvo / (good + bad + neutral),
-    posit: good / (good + bad + neutral) * 100,
+    posit: good / (good + bad + neutral) * 100 + ' %'
   }
   
    const handleGoodClick = () => {
