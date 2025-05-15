@@ -13,6 +13,7 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [allVotes, setVote] = useState (Array(8).fill(0))
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -24,10 +25,32 @@ const App = () => {
     </button>
   )
 
+  const handleVote = () => {
+   let valittu = (anecdotes.indexOf(anecdotes[selected])); 
+   //console.log('Valittu =', valittu)
+   //console.log('Allvotes =', allVotes)
+   const copy = [ ...allVotes ]
+   copy[valittu] += 1   
+   //console.log('copy = ', copy)
+   setVote(copy) 
+}
+
+  const MostVotes = () => {
+    const palaute = (Math.max(...allVotes))
+    //console.log(allVotes.indexOf(palaute))
+    return anecdotes[allVotes.indexOf(palaute)]
+  }
+
   return (
     <div>
-       <Button onClick={() => setSelected((getRandomInt(8)))} text="next anecdote" />
+       <h3>Anecdote of the day</h3>
        <p>{anecdotes[selected]}</p>
+       <p> has {allVotes[anecdotes.indexOf(anecdotes[selected])]} votes</p>
+       <Button onClick={handleVote} text='vote' />
+       <Button onClick={() => setSelected((getRandomInt(8)))} text="next anecdote" />
+       <h3>Anecdote with most votes</h3>
+       <p> <MostVotes /></p>
+       <p> has {Math.max(...allVotes)} votes</p>
      </div>
   )
 }
